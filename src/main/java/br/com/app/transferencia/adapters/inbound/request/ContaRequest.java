@@ -1,4 +1,4 @@
-package br.com.app.transferencia.adapters.inbound.rest;
+package br.com.app.transferencia.adapters.inbound.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -11,9 +11,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContaRequest {
-    @JsonProperty("id_cliente")
-    private String idCliente;
+    @JsonProperty("id_origem")
+    private String idOrigem;
 
-    @JsonProperty("id_cliente")
-    private String idConta;
+    @JsonProperty("id_destino")
+    private String idDestino;
 }

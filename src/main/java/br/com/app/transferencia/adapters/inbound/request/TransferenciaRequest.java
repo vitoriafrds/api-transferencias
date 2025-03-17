@@ -1,4 +1,4 @@
-package br.com.app.transferencia.adapters.inbound.rest;
+package br.com.app.transferencia.adapters.inbound.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -13,12 +13,13 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TransferenciaRequest {
-    @JsonProperty("origem")
-    private ContaRequest origem;
-
-    @JsonProperty("destino")
-    private ContaRequest destino;
+    @JsonProperty("id_cliente")
+    private String idCliente;
 
     @JsonProperty("valor")
     private BigDecimal valor;
+
+    @JsonProperty("conta")
+    private ContaRequest conta;
+
 }

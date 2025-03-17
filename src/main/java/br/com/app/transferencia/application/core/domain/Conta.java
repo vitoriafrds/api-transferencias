@@ -1,4 +1,4 @@
-package br.com.app.transferencia.application.domain;
+package br.com.app.transferencia.application.core.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Conta {
-    private String idCliente;
-    private String idConta;
+    private String idOrigem;
+    private String idDestino;
 }

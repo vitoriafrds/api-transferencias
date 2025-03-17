@@ -1,4 +1,4 @@
-package br.com.app.transferencia.application.domain;
+package br.com.app.transferencia.application.core.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Transferencia {
-    private Conta origem;
-    private Conta destino;
+    private String idCliente;
     private BigDecimal valor;
+    private Conta conta;
 }
