@@ -1,4 +1,4 @@
-package br.com.app.transferencia.adapters.outbound.clientes.response;
+package br.com.app.transferencia.application.core.domain.cliente;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClienteResponse {
+public class Customer {
     private String id;
-    private String nome;
-    private String telefone;
-    private String tipoPessoa;
+    private String name;
+    private String telephoneNumber;
+    private String personType;
 }

@@ -1,12 +1,11 @@
-package br.com.app.transferencia.adapters.outbound.clientes;
+package br.com.app.transferencia.adapters.outbound.customers;
 
 
-import br.com.app.transferencia.adapters.outbound.clientes.response.ClienteResponse;
-import br.com.app.transferencia.application.ports.CadastroClientesOutPort;
+import br.com.app.transferencia.adapters.outbound.customers.response.CustomerResponse;
+import br.com.app.transferencia.application.ports.outbound.CustomerOutPort;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
@@ -18,35 +17,34 @@ import static org.springframework.http.HttpMethod.GET;
 
 @Slf4j
 @Component
-public class CadastroClienteAdapter implements CadastroClientesOutPort {
+public class CustomerAdapter implements CustomerOutPort {
     private RestTemplate restTemplate;
 
     @Value("${application.clientes.url}")
     private String url;
 
     @Autowired
-    public CadastroClienteAdapter(RestTemplate restTemplate) {
+    public CustomerAdapter(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     @Override
-    public Optional<ClienteResponse> consultarCliente(String idCliente) {
-        var urlServicoCliente = formatarUrl(idCliente);
+    public Optional<CustomerResponse> getCustomerById(String customerId) {
+        var customerServiceUrl = formatUrl(customerId);
 
         try {
-            ResponseEntity<ClienteResponse> cliente = this.restTemplate
-                    .exchange(urlServicoCliente, GET, null, ClienteResponse.class);
+            ResponseEntity<CustomerResponse> cliente = this.restTemplate
+                    .exchange(customerServiceUrl, GET, null, CustomerResponse.class);
 
             return Optional.of(cliente.getBody());
         } catch (HttpClientErrorException error) {
-            log.error("Um erro ocorreu");
+            log.error("Ocorreu um erro na tentativa de consultar o cliente: {}", customerId);
         }
 
         return Optional.empty();
     }
 
-    private String formatarUrl(String idCliente) {
-        //TODO: Criar uma classe de configuracao para esse dado
+    private String formatUrl(String idCliente) {
         var placeHolderUrl =  this.url.concat("{id_cliente}");
         return placeHolderUrl.replace("{id_cliente}", idCliente);
     }

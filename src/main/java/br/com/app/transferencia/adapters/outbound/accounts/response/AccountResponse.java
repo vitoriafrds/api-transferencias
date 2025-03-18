@@ -1,4 +1,4 @@
-package br.com.app.transferencia.adapters.outbound.contas.response;
+package br.com.app.transferencia.adapters.outbound.accounts.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -12,16 +12,16 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContaResponse {
+public class AccountResponse {
     @JsonProperty("id")
     private String id;
 
     @JsonProperty("saldo")
-    private BigDecimal saldo;
+    private BigDecimal balance;
 
     @JsonProperty("ativo")
-    private boolean ativo;
+    private boolean active;
 
     @JsonProperty("limiteDiario")
-    private BigDecimal limiteDiario;
+    private BigDecimal dailyTransferLimit;
 }

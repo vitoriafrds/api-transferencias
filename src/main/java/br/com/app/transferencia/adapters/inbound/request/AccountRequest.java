@@ -6,20 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TransferenciaRequest {
-    @JsonProperty("id_cliente")
-    private String idCliente;
+public class AccountRequest {
+    @JsonProperty("id_origem")
+    private String sourceId;
 
-    @JsonProperty("valor")
-    private BigDecimal valor;
-
-    @JsonProperty("conta")
-    private ContaRequest conta;
-
+    @JsonProperty("id_destino")
+    private String destinationId;
 }
