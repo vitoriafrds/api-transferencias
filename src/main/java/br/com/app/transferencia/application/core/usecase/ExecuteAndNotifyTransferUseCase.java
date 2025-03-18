@@ -1,6 +1,6 @@
 package br.com.app.transferencia.application.core.usecase;
 
-import br.com.app.transferencia.adapters.outbound.TransferAdapter;
+import br.com.app.transferencia.adapters.outbound.transfer.TransferAdapter;
 import br.com.app.transferencia.adapters.outbound.notification.NotificationProducerAdapter;
 import br.com.app.transferencia.application.core.domain.transferencia.Transfer;
 import br.com.app.transferencia.application.exceptions.NotificationException;

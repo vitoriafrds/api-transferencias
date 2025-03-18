@@ -1,9 +1,6 @@
 package br.com.app.transferencia.adapters.inbound.rest.handler;
 
-import br.com.app.transferencia.application.exceptions.CustomerNotFoundException;
-import br.com.app.transferencia.application.exceptions.ContaInativaException;
-import br.com.app.transferencia.application.exceptions.LimiteDiarioInsuficienteException;
-import br.com.app.transferencia.application.exceptions.SaldoInsuficienteException;
+import br.com.app.transferencia.application.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -28,8 +25,8 @@ public class ErrorHandlerController {
         return ResponseEntity.unprocessableEntity().body(new ErrorWrapper(error));
     }
 
-    @ExceptionHandler({ContaInativaException.class})
-    public ResponseEntity<ErrorWrapper> contaInativaException(ContaInativaException exception) {
+    @ExceptionHandler({InactiveAccountException.class})
+    public ResponseEntity<ErrorWrapper> contaInativaException(InactiveAccountException exception) {
         Error error = new Error();
         error.setTimestamp(LocalDateTime.now());
         error.setCode(exception.getErro().getCode());
@@ -38,8 +35,8 @@ public class ErrorHandlerController {
         return ResponseEntity.unprocessableEntity().body(new ErrorWrapper(error));
     }
 
-    @ExceptionHandler({SaldoInsuficienteException.class})
-    public ResponseEntity<ErrorWrapper> saldoInsuficienteException(SaldoInsuficienteException exception) {
+    @ExceptionHandler({InsufficientBalanceException.class})
+    public ResponseEntity<ErrorWrapper> saldoInsuficienteException(InsufficientBalanceException exception) {
         Error error = new Error();
         error.setTimestamp(LocalDateTime.now());
         error.setCode(exception.getErro().getCode());
@@ -48,8 +45,8 @@ public class ErrorHandlerController {
         return ResponseEntity.unprocessableEntity().body(new ErrorWrapper(error));
     }
 
-    @ExceptionHandler({LimiteDiarioInsuficienteException.class})
-    public ResponseEntity<ErrorWrapper> limiteDiarioInsufienteException(LimiteDiarioInsuficienteException exception) {
+    @ExceptionHandler({InsufficientDailyLimitException.class})
+    public ResponseEntity<ErrorWrapper> limiteDiarioInsufienteException(InsufficientDailyLimitException exception) {
         Error error = new Error();
         error.setTimestamp(LocalDateTime.now());
         error.setCode(exception.getErro().getCode());
@@ -67,5 +64,45 @@ public class ErrorHandlerController {
                 errors.put(e.getField(), e.getDefaultMessage()));
 
         return errors;
+    }
+
+    @ExceptionHandler(ApplicationGeneralError.class)
+    public ResponseEntity<ErrorWrapper> handleApplicationGeneralError(ApplicationGeneralError erro) {
+        Error error = new Error();
+        error.setTimestamp(LocalDateTime.now());
+        error.setCode(erro.getErrorCode().getCode());
+        error.setMessage(erro.getMessage());
+
+        return ResponseEntity.internalServerError().body(new ErrorWrapper(error));
+    }
+
+    @ExceptionHandler(CustomerIntegrationException.class)
+    public ResponseEntity<ErrorWrapper> handleCustomerIntegrationException(CustomerIntegrationException erro) {
+        Error error = new Error();
+        error.setTimestamp(LocalDateTime.now());
+        error.setCode(erro.getCode().getCode());
+        error.setMessage(erro.getMessage());
+
+        return ResponseEntity.status(503).body(new ErrorWrapper(error));
+    }
+
+    @ExceptionHandler(AccountIntegrationException.class)
+    public ResponseEntity<ErrorWrapper> handleAccountIntegrationException(AccountIntegrationException erro) {
+        Error error = new Error();
+        error.setTimestamp(LocalDateTime.now());
+        error.setCode(erro.getErrorCode().getCode());
+        error.setMessage(erro.getMessage());
+
+        return ResponseEntity.status(503).body(new ErrorWrapper(error));
+    }
+
+    @ExceptionHandler(TransferIntegrationException.class)
+    public ResponseEntity<ErrorWrapper> handleTransferIntegrationException(TransferIntegrationException erro) {
+        Error error = new Error();
+        error.setTimestamp(LocalDateTime.now());
+        error.setCode(erro.getCode().getCode());
+        error.setMessage(erro.getMessage());
+
+        return ResponseEntity.status(503).body(new ErrorWrapper(error));
     }
 }

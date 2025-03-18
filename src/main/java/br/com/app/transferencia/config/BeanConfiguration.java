@@ -1,6 +1,6 @@
 package br.com.app.transferencia.config;
 
-import br.com.app.transferencia.adapters.outbound.TransferAdapter;
+import br.com.app.transferencia.adapters.outbound.transfer.TransferAdapter;
 import br.com.app.transferencia.adapters.outbound.accounts.AccountAdapter;
 import br.com.app.transferencia.adapters.outbound.customers.CustomerAdapter;
 import br.com.app.transferencia.adapters.outbound.notification.NotificationProducerAdapter;

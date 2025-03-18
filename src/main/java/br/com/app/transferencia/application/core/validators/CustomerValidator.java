@@ -23,7 +23,7 @@ public class CustomerValidator implements Validator<String> {
 
         if (customer.isEmpty()) {
             log.warn("Cadastro do cliente não encontrado");
-            throw new CustomerNotFoundException(ApplicationErrorCode.CUSTOMER_NOT_FOUD);
+            throw new CustomerNotFoundException(ApplicationErrorCode.CUSTOMER_NOT_FOUND);
         }
 
         log.info("Cliente encontrado na base, validações realizadas com sucesso");

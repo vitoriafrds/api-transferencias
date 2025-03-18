@@ -3,10 +3,10 @@ package br.com.app.transferencia.application.exceptions;
 import lombok.Getter;
 
 @Getter
-public class AccountIntegrationException extends RuntimeException {
+public class ApplicationGeneralError extends RuntimeException {
     private ApplicationErrorCode errorCode;
 
-    public AccountIntegrationException(ApplicationErrorCode erro) {
+    public ApplicationGeneralError(ApplicationErrorCode erro) {
         super(erro.getMessage());
 
         this.errorCode = erro;

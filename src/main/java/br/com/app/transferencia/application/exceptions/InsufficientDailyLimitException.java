@@ -3,10 +3,10 @@ package br.com.app.transferencia.application.exceptions;
 import lombok.Getter;
 
 @Getter
-public class ContaInativaException extends RuntimeException {
+public class InsufficientDailyLimitException extends RuntimeException {
     private ApplicationErrorCode erro;
 
-    public ContaInativaException(ApplicationErrorCode erro) {
+    public InsufficientDailyLimitException(ApplicationErrorCode erro) {
         super(erro.getMessage());
         this.erro = erro;
     }
