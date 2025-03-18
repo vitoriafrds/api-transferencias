@@ -8,16 +8,16 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.Optional;
 
-public class ConsultarClienteUseCase {
+public class GetCustomerUseCase {
     private CustomerAdapter clienteAdapter;
     private CoreMapper mapper;
-    public ConsultarClienteUseCase(CustomerAdapter clienteAdapter) {
+    public GetCustomerUseCase(CustomerAdapter clienteAdapter) {
         this.clienteAdapter = clienteAdapter;
         this.mapper = Mappers.getMapper(CoreMapper.class);
     }
 
-    public Optional<Customer> consultarCliente(String idCliente) {
-        Optional<CustomerResponse> cliente = clienteAdapter.getCustomerById(idCliente);
-        return cliente.map(clienteResponse -> mapper.toDomain(clienteResponse));
+    public Optional<Customer> getCustomerById(String idCliente) {
+        Optional<CustomerResponse> customer = clienteAdapter.getCustomerById(idCliente);
+        return customer.map(customerResponse -> mapper.toDomain(customerResponse));
     }
 }

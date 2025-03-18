@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class ContaNaoExistente extends RuntimeException {
-    private ErrorCode erro;
-    public ContaNaoExistente(ErrorCode erro) {
-        super(erro.getMensagem());
+    private ApplicationErrorCode erro;
+    public ContaNaoExistente(ApplicationErrorCode erro) {
+        super(erro.getMessage());
 
         this.erro = erro;
     }

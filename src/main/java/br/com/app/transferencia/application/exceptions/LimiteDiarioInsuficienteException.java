@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public class LimiteDiarioInsuficienteException extends RuntimeException {
-    private ErrorCode erro;
+    private ApplicationErrorCode erro;
 
-    public LimiteDiarioInsuficienteException(ErrorCode erro) {
-        super(erro.getMensagem());
+    public LimiteDiarioInsuficienteException(ApplicationErrorCode erro) {
+        super(erro.getMessage());
         this.erro = erro;
     }
 }

@@ -3,10 +3,10 @@ package br.com.app.transferencia.application.exceptions;
 import lombok.Getter;
 
 @Getter
-public class ContaInativaException extends RuntimeException {
+public class CustomerNotFoundException extends RuntimeException {
     private ApplicationErrorCode erro;
 
-    public ContaInativaException(ApplicationErrorCode erro) {
+    public CustomerNotFoundException(ApplicationErrorCode erro) {
         super(erro.getMessage());
         this.erro = erro;
     }

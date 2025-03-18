@@ -8,21 +8,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ValidateAndProcessTransferUseCase implements TransferInboundPort {
     private Validator<String> customerValidator;
-    private Validator<Transfer> transferValidator ;
-    private ExecuteTransferUseCase transferenciaUseCase;
+    private Validator<Transfer> transferValidator;
+    private ExecuteAndNotifyTransferUseCase transferenciaUseCase;
 
     public ValidateAndProcessTransferUseCase(Validator<String> customerValidator,
                                              Validator<Transfer>  transferValidator,
-                                             ExecuteTransferUseCase transferenciaUseCase) {
+                                             ExecuteAndNotifyTransferUseCase transferUseCase) {
         this.customerValidator = customerValidator;
         this.transferValidator = transferValidator;
-        this.transferenciaUseCase = transferenciaUseCase;
+        this.transferenciaUseCase = transferUseCase;
     }
 
     public void execute(Transfer transfer) {
+        log.info("As validações serão aplicadas...");
         this.customerValidator.validate(transfer.getCustomerId());
         this.transferValidator.validate(transfer);
 
-        this.transferenciaUseCase.execute(transfer);
+        this.transferenciaUseCase.transfer(transfer);
     }
 }

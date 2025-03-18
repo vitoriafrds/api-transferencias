@@ -18,8 +18,9 @@ public class GetAccountUseCase {
         this.mapper = Mappers.getMapper(CoreMapper.class);
     }
 
-    public Optional<Account> consultarConta(String id) {
-        Optional<AccountResponse> conta = contaAdapter.getAccountById(id);
-        return conta.map(contaResponse -> mapper.toDomain(contaResponse));
+    public Optional<Account> getAccountById(String id) {
+        log.info("Buscando dados da conta: {}", id);
+        Optional<AccountResponse> account = contaAdapter.getAccountById(id);
+        return account.map(accountResponse -> mapper.toDomain(accountResponse));
     }
 }

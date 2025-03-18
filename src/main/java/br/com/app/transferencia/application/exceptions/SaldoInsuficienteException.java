@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public class SaldoInsuficienteException extends RuntimeException {
-    ErrorCode erro;
+    ApplicationErrorCode erro;
 
-    public SaldoInsuficienteException(ErrorCode erro) {
-        super(erro.getMensagem());
+    public SaldoInsuficienteException(ApplicationErrorCode erro) {
+        super(erro.getMessage());
         this.erro = erro;
     }
 }

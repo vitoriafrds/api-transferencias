@@ -1,7 +1,10 @@
-package br.com.app.transferencia.adapters.inbound.request;
+package br.com.app.transferencia.adapters.inbound.rest.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +21,13 @@ public class TransferRequest {
     @JsonProperty("id_transferencia")
     private String transferId;
 
+    @NotNull(message = "O campo é obrigatório")
+    @NotEmpty(message = "O campo é obrigatório")
     @JsonProperty("id_cliente")
     private String customerId;
 
+    @NotNull(message = "É necessário informar um valor para a transferência")
+    @Positive(message = "Informe um valor maior que 0")
     @JsonProperty("valor")
     private BigDecimal amount;
 

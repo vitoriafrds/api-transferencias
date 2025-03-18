@@ -1,4 +1,4 @@
-package br.com.app.transferencia.adapters.inbound.handler;
+package br.com.app.transferencia.adapters.inbound.rest.handler;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

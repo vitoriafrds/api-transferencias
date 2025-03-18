@@ -10,5 +10,12 @@ application:
   transferencias:
     url: http://localhost:9090/contas/saldos
 
+aws:
+  sqs:
+    endpoint: http://localhost:4566/
+    queue:
+      url: http://sqs.sa-east-1.localhost.localstack.cloud:4566/000000000000/notifica-bacen
+
+
 server:
   port: 8090

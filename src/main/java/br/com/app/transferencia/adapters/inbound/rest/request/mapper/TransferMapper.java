@@ -1,7 +1,7 @@
-package br.com.app.transferencia.adapters.inbound.request.mapper;
+package br.com.app.transferencia.adapters.inbound.rest.request.mapper;
 
-import br.com.app.transferencia.adapters.inbound.request.AccountRequest;
-import br.com.app.transferencia.adapters.inbound.request.TransferRequest;
+import br.com.app.transferencia.adapters.inbound.rest.request.AccountRequest;
+import br.com.app.transferencia.adapters.inbound.rest.request.TransferRequest;
 import br.com.app.transferencia.application.core.domain.transferencia.TransferAccount;
 import br.com.app.transferencia.application.core.domain.transferencia.Transfer;
 import org.mapstruct.Mapper;
