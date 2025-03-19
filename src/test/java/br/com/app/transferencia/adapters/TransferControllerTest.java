@@ -24,7 +24,6 @@ public class TransferControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
     @Test
     void testTransfer_ValidRequest_ShouldReturnCreated() throws Exception {
         String requestBody = """

@@ -8,5 +8,4 @@ public class TransferenciaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TransferenciaApplication.class, args);
 	}
-
 }
