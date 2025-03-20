@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: transferencia
+
+application:
+  contas:
+    url: http://localhost:9090/contas/
+  clientes:
+    url: http://localhost:9090/clientes/
+  transferencias:
+    url: http://localhost:9090/contas/saldos
+  notificacoes:
+    url: http://localhost:9090/notificacoes
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      accountService:
+        failure-rate-threshold: 90
+        slow-call-rate-threshold: 90
+        wait-duration-in-open-state: 30s
+        minimum-number-of-calls: 2
+        permitted-number-of-calls-in-half-open-state: 3
+        register-health-indicator: true
+
+  retry:
+    instances:
+      accountRetry:
+        max-attempts: 3
+        wait-duration: 2s
+        retry-exceptions:
+          - org.springframework.web.client.RestClientException
+        ignore-exceptions:
+          - org.springframework.web.client.HttpClientErrorException
+
+  timelimiter:
+    instances:
+      accountService:
+        timeout-duration: 5s
+
+server:
+  port: 8090
