@@ -3,7 +3,7 @@ package br.com.app.transferencia.config;
 import br.com.app.transferencia.adapters.outbound.transfer.TransferAdapter;
 import br.com.app.transferencia.adapters.outbound.accounts.AccountAdapter;
 import br.com.app.transferencia.adapters.outbound.customers.CustomerAdapter;
-import br.com.app.transferencia.adapters.outbound.notification.NotificationProducerAdapter;
+import br.com.app.transferencia.adapters.outbound.notification.NotificationAdapter;
 import br.com.app.transferencia.application.core.domain.transferencia.Transfer;
 import br.com.app.transferencia.application.core.usecase.*;
 import br.com.app.transferencia.application.core.validators.CustomerValidator;
@@ -33,7 +33,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public ExecuteAndNotifyTransferUseCase realizarTransferenciaUseCase(TransferAdapter adapter, NotificationProducerAdapter notificationAdapter) {
+    public ExecuteAndNotifyTransferUseCase realizarTransferenciaUseCase(TransferAdapter adapter, NotificationAdapter notificationAdapter) {
         return new ExecuteAndNotifyTransferUseCase(adapter, notificationAdapter);
     }
 

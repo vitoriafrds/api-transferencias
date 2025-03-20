@@ -5,7 +5,16 @@ A **API de Transferências** é um serviço responsável por realizar transaçõ
 
 ---
 
-### **Detalhamento Técnico**  
+### **Detalhamento Técnico** 
+
+O fluxo terá inicio através da chamada para o gateway da aplicação. 
+A requisição será encaminhada via nlb para o serviço do ECS e então, uma série de validações serão realizadas.
+O serviço de Cadastro será consumida para confirmação da existência do cliente que fará a transferência.
+O serviço de contas será utilizado para validar se a conta possui saldo e limite o suficiente para que a transação
+seja concluída. Por fim, quando a transferência é realizada, uma notificação é realizada ao Bacen de forma síncrona.
+
+![Texto alternativo](images/arquitetura-api-transferencia-api-transferencias-as-is.drawio.png)
+
 
 #### **Tecnologias Utilizadas**  
 - Java  
@@ -122,6 +131,19 @@ A API pode retornar diferentes erros com base nas validações e falhas durante 
 }
 ```
 
+#### **5. Erro Interno do Servidor**
+- **Status:** `500 Internal Server Error`
+- **Response Body:**  
+```json
+{
+  "error": {
+    "code": "A001",
+    "message": "Unexpected failure in the service.",
+    "timestamp": "2025-03-19T21:44:15.2515057"
+  }
+}
+```
+
 #### **6. Erro na transferencia**
 - **Status:** `422 Unprocessable Entity`
 - **Response Body:**
@@ -135,15 +157,6 @@ A API pode retornar diferentes erros com base nas validações e falhas durante 
 }
 ```
 
-#### **5. Erro Interno do Servidor**
-- **Status:** `500 Internal Server Error`
-- **Response Body:**  
-```json
-{
-  "error": {
-    "code": "A001",
-    "message": "Unexpected failure in the service.",
-    "timestamp": "2025-03-19T21:44:15.2515057"
-  }
-}
-```
+### **Proposta de melhoria na arquitetura**
+
+![Texto alternativo](images/arquitetura-api-transferencia-api-transferencia-v2.drawio.png)

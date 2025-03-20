@@ -1,9 +1,10 @@
 package br.com.app.transferencia.application.core.usecase;
 
-import br.com.app.transferencia.adapters.outbound.notification.NotificationProducerAdapter;
+import br.com.app.transferencia.adapters.outbound.notification.NotificationAdapter;
 import br.com.app.transferencia.adapters.outbound.transfer.TransferAdapter;
 import br.com.app.transferencia.application.core.domain.transferencia.Transfer;
 import br.com.app.transferencia.application.exceptions.NotificationException;
+import br.com.app.transferencia.application.exceptions.NotificationIntegrationException;
 import br.com.app.transferencia.application.ports.outbound.NotificationOutPort;
 import br.com.app.transferencia.application.ports.outbound.TransferenciaOutBoundPort;
 import lombok.extern.slf4j.Slf4j;
@@ -11,9 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ExecuteAndNotifyTransferUseCase implements TransferenciaOutBoundPort, NotificationOutPort {
     private final TransferAdapter transferAdapter;
-    private final NotificationProducerAdapter notificationAdapter;
+    private final NotificationAdapter notificationAdapter;
 
-    public ExecuteAndNotifyTransferUseCase(TransferAdapter transferenciaAdapter, NotificationProducerAdapter notificationAdapter) {
+    public ExecuteAndNotifyTransferUseCase(TransferAdapter transferenciaAdapter, NotificationAdapter notificationAdapter) {
         this.transferAdapter = transferenciaAdapter;
         this.notificationAdapter = notificationAdapter;
     }
@@ -24,11 +25,10 @@ public class ExecuteAndNotifyTransferUseCase implements TransferenciaOutBoundPor
 
         try {
             this.notify(transfer);
-        } catch (NotificationException error) {
+        } catch (NotificationIntegrationException error) {
             log.warn("A tentativa de envio de notificação falhou, mas a transferência ocorreu com sucesso");
-            //TODO: Implementar algum mecanismo para reprocessamento da mensagem
+            //TODO: Futuramente, pode ser implementado um fluxo para reenvio dessas transferências
         }
-
     }
 
     @Override

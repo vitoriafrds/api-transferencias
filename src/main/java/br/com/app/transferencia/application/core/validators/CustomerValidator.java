@@ -21,11 +21,15 @@ public class CustomerValidator implements Validator<String> {
         log.info("Verificando se o cliente de id: {} existe na base de cadastro", customerId);
         Optional<Customer> customer = clienteUseCase.getCustomerById(customerId);
 
-        if (customer.isEmpty()) {
+        if (customerIsEmpty(customer)) {
             log.warn("Cadastro do cliente não encontrado");
             throw new CustomerNotFoundException(ApplicationErrorCode.CUSTOMER_NOT_FOUND);
         }
 
         log.info("Cliente encontrado na base, validações realizadas com sucesso");
+    }
+
+    private static boolean customerIsEmpty(Optional<Customer> customer) {
+        return customer.isEmpty();
     }
 }

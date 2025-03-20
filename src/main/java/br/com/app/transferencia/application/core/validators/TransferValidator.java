@@ -23,26 +23,45 @@ public class TransferValidator implements Validator<Transfer> {
 
         Optional<Account> sourceAccount = contaUseCase.getAccountById(accountId);
 
-        if (sourceAccount.isEmpty()) {
+        if (accountIsEmpty(sourceAccount)) {
             log.error("Nenhum dado encontrado para a conta: {}", accountId);
             throw new AccountNotFoundException(ApplicationErrorCode.NON_EXISTENT_ACCOUNT);
         }
 
-       if (!sourceAccount.get().isActive()) {
+        var account = sourceAccount.get();
+
+       if (isInactiveAccount(account)) {
            log.error("A conta não esta ativa, a transferência não será concluída...");
            throw new InactiveAccountException(ApplicationErrorCode.INACTIVE_ACCOUNT);
        }
 
-       if (sourceAccount.get().getBalance().compareTo(transfer.getAmount()) < 0) {
+       if (isInsufficientBalance(transfer, account)) {
            log.error("A conta não tem saldo suficiente para realizar a transação..");
            throw new InsufficientBalanceException(ApplicationErrorCode.INSUFFICIENT_BALANCE);
        }
 
-       if (sourceAccount.get().getDailyTransferLimit().compareTo(transfer.getAmount()) < 0) {
+       if (isInsufficientDailyTransferLimit(transfer, account)) {
            log.error("O limite diário para transferências nessa conta foi atingido");
            throw new InsufficientDailyLimitException(ApplicationErrorCode.INSUFFICIENT_DAILY_LIMIT);
        }
 
        log.info("Todas as validações aplicadas com sucesso, a trasnsferência seguirá para efetivação");
     }
+
+    private static boolean isInsufficientDailyTransferLimit(Transfer transfer, Account sourceAccount) {
+        return sourceAccount.getDailyTransferLimit().compareTo(transfer.getAmount()) < 0;
+    }
+
+    private static boolean isInsufficientBalance(Transfer transfer, Account sourceAccount) {
+        return sourceAccount.getBalance().compareTo(transfer.getAmount()) < 0;
+    }
+
+    private static boolean isInactiveAccount(Account sourceAccount) {
+        return !sourceAccount.isActive();
+    }
+
+    private static boolean accountIsEmpty(Optional<Account> sourceAccount) {
+        return sourceAccount.isEmpty();
+    }
+
 }

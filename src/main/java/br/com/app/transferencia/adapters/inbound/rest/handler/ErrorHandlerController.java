@@ -45,6 +45,17 @@ public class ErrorHandlerController {
         return ResponseEntity.unprocessableEntity().body(new ErrorWrapper(error));
     }
 
+    @ExceptionHandler({NotificationIntegrationException.class})
+    public ResponseEntity<ErrorWrapper> contaInativaException(NotificationIntegrationException exception) {
+        Error error = new Error();
+        error.setTimestamp(LocalDateTime.now());
+        error.setCode(exception.getErrorCode().getCode());
+        error.setMessage(exception.getMessage());
+
+        return ResponseEntity.internalServerError().body(new ErrorWrapper(error));
+    }
+
+
     @ExceptionHandler({InsufficientBalanceException.class})
     public ResponseEntity<ErrorWrapper> saldoInsuficienteException(InsufficientBalanceException exception) {
         Error error = new Error();

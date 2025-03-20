@@ -13,6 +13,7 @@ public enum ApplicationErrorCode {
     ACCOUNT_INTEGRATION_SERVICE_ERROR("Error integrating with the accounts service.", "I001"),
     CUSTOMER_INTEGRATION_SERVICE_ERROR("Error integrating with the customer service.", "I002"),
     TRANSFER_INTEGRATION_SERVICE_ERROR("Error integrating with the transfer service.", "I003"),
+    NOTIFICATION_INTEGRATION_SERVICE_ERROR("Error integrating with the notification service.", "I004"),
     APPLICATION_GENERAL_ERROR("Unexpected failure in the service.", "A001");
 
     private String message;
