@@ -58,38 +58,92 @@ A API pode retornar diferentes erros com base nas validações e falhas durante 
 ```
 
 #### **2. Erro de Transferência Invalida (Saldo Insuficiente)**
-- **Status:** `400 Bad Request`
+- **Status:** `422 Unprocessable Entity`
 - **Response Body:**  
 ```json
 {
-  "erro": "Saldo insuficiente para realizar a transferência",
-  "detalhes": [
-    "A conta de origem não possui saldo suficiente para realizar a transferência."
-  ]
+  "error": {
+    "code": "CO02",
+    "message": "Insufficient balance to complete the transfer.",
+    "timestamp": "2025-03-19T21:39:19.3183581"
+  }
 }
 ```
 
-#### **3. Conta de Origem ou Destino Não Encontrada**
-- **Status:** `404 Not Found`
+#### **3. Erro de Transferência Invalida (Limite Insuficiente)**
+- **Status:** `422 Unprocessable Entity`
+- **Response Body:**
+```json
+{
+  "error": {
+    "code": "CO03",
+    "message": "Insufficient daily account limit to complete the transfer",
+    "timestamp": "2025-03-19T21:39:19.3183581"
+  }
+}
+```
+
+#### **4. Conta de Origem**
+- **Status:** `422 Unprocessable Entity`
 - **Response Body:**  
 ```json
 {
-  "erro": "Conta não encontrada",
-  "detalhes": [
-    "A conta de origem com id 'b3a7f2a0-8c1f-4d76-b2e3-5d9f6a1b0c78' não foi encontrada.",
-    "A conta de destino com id 'f14c5d3e-7a2b-4e98-912f-3e6a8b9d2e45' não foi encontrada."
-  ]
+  "error": {
+    "code": "CO03",
+    "message": "The specified account does not exist.",
+    "timestamp": "2025-03-19T21:44:15.2515057"
+  }
 }
 ```
 
-#### **4. Erro Interno do Servidor**
+#### **5. Conta Inativa**
+- **Status:** `422 Unprocessable Entity`
+- **Response Body:**
+```json
+{
+  "error": {
+    "code": "CO01",
+    "message": "The specified account is not active",
+    "timestamp": "2025-03-19T21:44:15.2515057"
+  }
+}
+```
+
+#### **6. Conta Inativa**
+- **Status:** `422 Unprocessable Entity`
+- **Response Body:**
+```json
+{
+  "error": {
+    "code": "CLI001",
+    "message": "The specified account is not activeThe specified customer does not exist.",
+    "timestamp": "2025-03-19T21:44:15.2515057"
+  }
+}
+```
+
+#### **6. Erro na transferencia**
+- **Status:** `422 Unprocessable Entity`
+- **Response Body:**
+```json
+{
+  "error": {
+    "code": "CLI001",
+    "message": "The specified account is not activeThe specified customer does not exist.",
+    "timestamp": "2025-03-19T21:44:15.2515057"
+  }
+}
+```
+
+#### **5. Erro Interno do Servidor**
 - **Status:** `500 Internal Server Error`
 - **Response Body:**  
 ```json
 {
-  "erro": "Erro interno do servidor",
-  "detalhes": [
-    "Ocorreu um erro inesperado ao processar a transferência."
-  ]
+  "error": {
+    "code": "A001",
+    "message": "Unexpected failure in the service.",
+    "timestamp": "2025-03-19T21:44:15.2515057"
+  }
 }
 ```

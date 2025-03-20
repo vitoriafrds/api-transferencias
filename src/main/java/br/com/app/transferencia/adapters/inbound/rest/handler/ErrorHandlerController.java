@@ -35,6 +35,16 @@ public class ErrorHandlerController {
         return ResponseEntity.unprocessableEntity().body(new ErrorWrapper(error));
     }
 
+    @ExceptionHandler({AccountNotFoundException.class})
+    public ResponseEntity<ErrorWrapper> contaInativaException(AccountNotFoundException exception) {
+        Error error = new Error();
+        error.setTimestamp(LocalDateTime.now());
+        error.setCode(exception.getErro().getCode());
+        error.setMessage(exception.getMessage());
+
+        return ResponseEntity.unprocessableEntity().body(new ErrorWrapper(error));
+    }
+
     @ExceptionHandler({InsufficientBalanceException.class})
     public ResponseEntity<ErrorWrapper> saldoInsuficienteException(InsufficientBalanceException exception) {
         Error error = new Error();
