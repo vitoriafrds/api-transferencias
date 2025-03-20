@@ -21,13 +21,13 @@ public class TransferRequest {
     @JsonProperty("id_transferencia")
     private String transferId;
 
-    @NotNull(message = "O campo é obrigatório")
-    @NotEmpty(message = "O campo é obrigatório")
+    @NotNull(message = "The field is required")
+    @NotEmpty(message = "The field is required")
     @JsonProperty("id_cliente")
     private String customerId;
 
-    @NotNull(message = "É necessário informar um valor para a transferência")
-    @Positive(message = "Informe um valor maior que 0")
+    @NotNull(message = "A value for the transfer must be provided")
+    @Positive(message = "Please provide a value greater than 0")
     @JsonProperty("valor")
     private BigDecimal amount;
 

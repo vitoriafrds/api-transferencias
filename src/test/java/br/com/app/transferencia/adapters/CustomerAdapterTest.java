@@ -28,7 +28,7 @@ public class CustomerAdapterTest {
     }
 
     @Test
-    void testDeveConsultarClienteCorretamente() {
+    void testShouldConsultCustomerCorrectly() {
         when(clientMock.getCustomerById(anyString())).thenReturn(Optional.of(
                 new CustomerResponse("1", "name", "03123131", "PJ")
         ));

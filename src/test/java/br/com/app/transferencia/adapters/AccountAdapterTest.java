@@ -32,7 +32,7 @@ public class AccountAdapterTest {
     }
 
     @Test
-    void testDeveConsultarContasCorretamente() {
+    void testShouldConsultAccountsCorrectly() {
         Mockito.when(accountClientMock.getAccountById(Mockito.anyString()))
                 .thenReturn(Optional.of(new AccountResponse("1", BigDecimal.valueOf(200), true, BigDecimal.valueOf(500))));
 

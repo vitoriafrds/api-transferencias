@@ -25,7 +25,7 @@ public class TransferControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void testTransfer_ValidRequest_ShouldReturnCreated() throws Exception {
+    void testTransferValidRequestShouldReturnCreated() throws Exception {
         String requestBody = """
              {
                "id_cliente": "2ceb26e9-7b5c-417e-bf75-ffaa66e3a76f",
@@ -47,7 +47,7 @@ public class TransferControllerTest {
     }
 
     @Test
-    void testTransfer_InvalidRequest_ShouldReturnBadRequest() throws Exception {
+    void testTransferInvalidRequestShouldReturnBadRequest() throws Exception {
         String requestBody = """
              {
                "id_cliente": "2ceb26e9-7b5c-417e-bf75-ffaa66e3a76f",
