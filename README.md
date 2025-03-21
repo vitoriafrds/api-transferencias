@@ -158,5 +158,6 @@ A API pode retornar diferentes erros com base nas validações e falhas durante 
 ```
 
 ### **Proposta de melhoria na arquitetura**
+Proposta de desacoplamento entre domínios: Transferências e Notificação.
 
 ![Texto alternativo](images/arquitetura-api-transferencia-api-transferencia-v2.drawio.png)
